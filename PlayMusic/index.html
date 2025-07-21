@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play Music</title>
+    <link rel="stylesheet" href="/PlayMusic/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="playSong">
+        <header>
+          <div class="image">
+            <img id="main-image" src="" alt="" />
+          </div>
+          <div class="info">
+            <p class="title">Song</p>
+            <p class="NameSong" id="main-title"></p>
+            <ul class="info-author" id="main-info-author">
+            </ul>
+          </div>
+        </header>
+        <div class="body">
+          <div class="btn-head">
+            <div class="btn btn-header-play">
+              <i class="fas fa-pause icon-pause "></i>
+              <i class="fas fa-play icon-play"></i>
+            </div>
+            <div class="btn btn-add">
+              <img src="/PlayMusic/image/btn/icons8-plus-50.png" alt="" />
+            </div>
+            <div class="btn btn-download">
+              <img src="/PlayMusic/image/btn/icons8-download-48.png" alt="" />
+            </div>
+          </div>
+          <div class="lyrics">
+            <p class="name">Lyrics</p>
+            <p class="lyrics-song" id="lyrics-content"></p>
+            <span class="show-more">...Show more</span>
+          </div>
+          <div class="recommended">
+            <p class="title-rcm">Recommended</p>
+            <div id="recommended-list"></div>
+          </div>
+        </div>
+        <footer>
+          <div class="fotter-song">
+            <div class="image-footter">
+              <img id="footer-image" src="" alt="" />
+            </div>
+            <div class="info-footer">
+              <h4 id="footer-title"></h4>
+              <p id="footer-author"></p>
+            </div>
+          </div>
+          <div class="btn-fotter-song">
+            <div class="control">
+              <div class="btn btn-random"><i class="fas fa-random"></i></div>
+              <div class="btn btn-prev">
+                <i class="fas fa-step-backward"></i>
+              </div>
+              <div class="btn btn-toggle-play ">
+                <i class="fas fa-pause icon-pause"></i>
+                <i class="fas fa-play icon-play"></i>
+              </div>
+              <div class="btn btn-next">
+                <i class="fas fa-step-forward"></i>
+              </div>
+              <div class="btn btn-repeat"><i class="fas fa-redo"></i></div>
+            </div>
+            <div class="range-song">
+              <p>0:00</p>
+              <input
+                class="input-rage-song"
+                type="range"
+                value="0"
+                min="0"
+                max="100"
+              />
+              <p>4:32</p>
+            </div>
+            <audio id="audio" src=""></audio>
+          </div>
+          <div class="audio-song">
+            <div class="btn btn-audio">
+              <i class="fas fa-volume-up"></i>
+            </div>
+            <div class="range-audio">
+              <input
+                class="range-volume"
+                type="range"
+                value="0"
+                min="0"
+                max="100"
+                step="1"
+              />
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script src="/PlayMusic/main.js"></script>
+  </body>
+</html>
