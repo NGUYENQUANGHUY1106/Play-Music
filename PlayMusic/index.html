@@ -31,7 +31,7 @@
         </header>
         <div class="body">
           <div class="btn-head">
-            <div class="btn btn-header-play">
+            <div style="cursor: pointer;" class="btn btn-header-play">
               <i class="fas fa-pause icon-pause "></i>
               <i class="fas fa-play icon-play"></i>
             </div>
@@ -78,15 +78,16 @@
               <div class="btn btn-repeat"><i class="fas fa-redo"></i></div>
             </div>
             <div class="range-song">
-              <p>0:00</p>
+              <p class="start-song">0:00</p>
               <input
                 class="input-rage-song"
                 type="range"
                 value="0"
                 min="0"
                 max="100"
+                step="1"
               />
-              <p>4:32</p>
+              <p class="times-song-fotter">4:32</p>
             </div>
             <audio id="audio" src=""></audio>
           </div>

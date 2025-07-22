@@ -12,7 +12,10 @@ var footer_image = document.querySelector('#footer-image');
 var btnPlay = document.querySelector('.btn-toggle-play');
 var audio = document.querySelector('#audio')
 var btnPlayHeader = document.querySelector('.btn-header-play');
-
+var times_song_footer = document.querySelector('.times-song-fotter');
+var input_range_song = document.querySelector('.input-rage-song');
+var start_time_song = document.querySelector('.start-song');
+var btnNext = document.querySelector('.btn-next');
 showMoreBtn.onclick = () => {
   isExpanded = !isExpanded;
   if (isExpanded) {
@@ -70,35 +73,51 @@ renderFirstSong : function()
 renderRecommend: function () {
   const list = document.getElementById("recommended-list");
   const html = this.songs
-    .map((song) => {
+    .map((song, index) => {
+      const audioTemp = new Audio(song.audio);
+      audioTemp.addEventListener("loadedmetadata", () => {
+        const durationElement = document.querySelector(`#time-${index}`);
+        if (durationElement) {
+          const minutes = Math.floor(audioTemp.duration / 60);
+          const seconds = Math.floor(audioTemp.duration % 60).toString().padStart(2, '0');
+          durationElement.textContent = `${minutes}:${seconds}`;
+        }
+      });
+
       return `
-      <div class="song-rcm" >
-      <div class="info-song-rcm">
-        <div class="image-song-rcm">
-          <img src="${song.image}" alt="" />
+        <div class="song-rcm">
+          <div class="info-song-rcm">
+            <div class="image-song-rcm">
+              <img src="${song.image}" alt="" />
+            </div>
+            <div class="name-song-rcm">
+              <h4>${song.name}</h4>
+              <p>${song.author}</p>
+            </div>
+          </div>
+          <div class="quantity"><p>25,000,000</p></div>
+          <div class="time-song" id="time-${index}">Loading...</div>
         </div>
-        <div class="name-song-rcm">
-          <h4>${song.name}</h4>
-          <p>${song.author}</p>
-        </div>
-      </div>
-      <div class="quantity"><p>25,000,000</p></div>
-      <div class="time-song">4:22</div>
-    </div>
-      `
-       
-      ;
+      `;
     })
     .join("");
 
   list.innerHTML = html;
 },
+
 footerSong : function()
 {
   const song = this.songs[this.currentIndex];
   footer_author.innerHTML= song.author;
   footer_image.src = song.image;
-  footer_title.innerHTML = song.name
+  footer_title.innerHTML = song.name;
+  
+  audio.addEventListener("loadedmetadata",()=>
+  {
+    const minutes = Math.floor(audio.duration / 60);
+    const seconds = Math.floor(audio.duration % 60).toString().padStart(2,'0');
+    times_song_footer.innerText  = `${minutes}:${seconds}`
+  })
 
 },
 // sự kiện các nút nhấn 
@@ -121,6 +140,47 @@ handleEvent : function()
   }
   btnPlayHeader.onclick = togglePlay;
   btnPlay.onclick = togglePlay;
+   
+  console.log([input_range_song]);
+
+  // di chuyển tiến độ bài hát
+  (audio.ontimeupdate = function ()
+    {
+      console.log(audio.currentTime);
+      if(audio.duration)
+      {
+        const current = Math.floor(audio.currentTime);
+        const minutes = Math.floor(current / 60);
+        const seconds  = Math.floor(current % 60).toString().padStart(2,'0');
+        const progressCurrent = Math.floor((audio.currentTime / audio.duration) *100);
+        input_range_song.value = progressCurrent
+        start_time_song.textContent = `${minutes}:${seconds}`
+      }
+    }
+  ),
+  // khi tua bài hát
+  (  input_range_song.onchange = function(e)
+    {
+      // console.log(e.target.value); 
+      const seekTime =  (audio.duration /100 ) * e.target.value;
+      audio.currentTime = seekTime;
+      start_time_song.textContent = seekTime;
+    }
+  ),
+  // click phát bài hát tiếp theo 
+  (
+    btnNext.onclick = function()
+    {
+      _this.nextSong();
+      audio.play();
+      btnPlay.classList.add("active");
+      btnPlayHeader.classList.add("active");
+
+    }
+  )
+
+
+
 },
 // lấy bài hát đầu tiên hiển thị lên 
 defineProperties : function()
@@ -131,6 +191,28 @@ defineProperties : function()
       return this.songs[this.currentIndex];
     }
   })
+},
+nextSong : function()
+{
+  this.currentIndex ++ ;
+  if(this.currentIndex >= this.songs.length)
+  {
+    this.currentIndex = 0;
+  }
+  this.renderFirstSong();
+  this.renderRecommend();
+  this.footerSong();
+},
+prevSong : function()
+{
+   this.currentIndex -- ;
+   if(this.currentIndex <= 0)
+   {
+    this.currentIndex = this.songs,length - 1;
+   }
+   this.renderFirstSong();
+   this.renderRecommend();
+   this.footerSong();
 },
 start : function()
 {
