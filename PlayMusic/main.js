@@ -1,7 +1,8 @@
 const lyrics = document.querySelector(".lyrics-song");
 const showMoreBtn = document.querySelector(".show-more");
 let isExpanded = false;
-var apiSongs = "../song.json" 
+var apiSongs = "https://nguyenquanghuy1106.github.io/song.json";
+
 
 var imageFirst = document.querySelector("#main-image");
 var nameSong = document.querySelector("#main-title");
