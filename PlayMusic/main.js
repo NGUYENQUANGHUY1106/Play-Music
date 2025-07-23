@@ -1,7 +1,7 @@
 const lyrics = document.querySelector(".lyrics-song");
 const showMoreBtn = document.querySelector(".show-more");
 let isExpanded = false;
-var apiSongs = "./song.json";
+var apiSongs = "../song.json";
 
 
 var imageFirst = document.querySelector("#main-image");
