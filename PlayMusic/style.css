@@ -99,6 +99,13 @@ header .info-author li:not(:nth-child(1)):not(:nth-child(2))
 {
    display: none;
 }
+.btn-random.active .fa-random
+{
+    color: #097e4f;
+}
+.btn-repeat.active .fa-redo{
+    color: #097e4f;
+}
 .body .btn-head .btn:nth-child(1)
 {
     width: 56px;
@@ -161,7 +168,11 @@ header .info-author li:not(:nth-child(1)):not(:nth-child(2))
     font-size: 30px;
     font-weight: 600;
     color: #fff;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+.song-rcm.show{
+    background-color: #121212;
+    border-radius: 10px;
 }
 .recommended .image-song-rcm img
 {
@@ -188,6 +199,7 @@ header .info-author li:not(:nth-child(1)):not(:nth-child(2))
     align-items: center;
     justify-content: space-between;
     margin-top: 10px;
+    padding: 10px;
 }
 .recommended .name-song-rcm h4
 {
@@ -226,6 +238,8 @@ footer
 footer .fotter-song
 {
     display: flex;
+    max-width: 250px;
+    width: 100%;
     align-items: center;
     gap: 20px;
 }
@@ -282,6 +296,7 @@ footer .btn-toggle-play
 
    
 }
+
  .btn-toggle-play .icon-pause
 {
   display: none;   
